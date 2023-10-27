@@ -12,6 +12,13 @@ public class Odontologo {
         this.matricula = matricula;
     }
 
+    public Odontologo(String apellido, String nombre, int matricula, int id) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.matricula = matricula;
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Odontologo{" +
@@ -20,13 +27,6 @@ public class Odontologo {
                 ", matricula='" + matricula + '\'' +
                 ", id=" + id +
                 '}';
-    }
-
-    public Odontologo(String apellido, String nombre, int matricula, int id) {
-        this.apellido = apellido;
-        this.nombre = nombre;
-        this.matricula = matricula;
-        this.id = id;
     }
 
     public int getId() {

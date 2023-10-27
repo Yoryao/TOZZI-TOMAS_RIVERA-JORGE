@@ -30,6 +30,9 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
             preparedStatement.execute();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
+    //      ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            
             odontologoRegistrado = new Odontologo(odontologo.getApellido(), odontologo.getNombre(), odontologo.getMatricula());
 
             while (resultSet.next()) {
@@ -65,19 +68,19 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
 
         try {
             connection = ConnectionH2.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ODONTOLOGOS" );
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ODONTOLOGOS");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-                while (resultSet.next()){
-                    Odontologo odontologo = crearObjetoOdontologo(resultSet);
-                    odontologos.add(odontologo);
-                }
+            while (resultSet.next()) {
+                Odontologo odontologo = crearObjetoOdontologo(resultSet);
+                odontologos.add(odontologo);
+            }
 
-                log.info("Se agregaron los odontologos a la lista.");
+            log.info("Se agregaron los odontologos a la lista.");
 
         } catch (Exception e) {
             log.info("Error recuperando la lista");
-        }  finally {
+        } finally {
             try {
                 connection.close();
             } catch (Exception ex) {
@@ -87,7 +90,7 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
         return odontologos;
     }
 
-    private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException{
+    private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException {
         return new Odontologo(resultSet.getString("apellido"), resultSet.getNString("nombres"), resultSet.getInt("matricula"), resultSet.getInt("id"));
     }
 
