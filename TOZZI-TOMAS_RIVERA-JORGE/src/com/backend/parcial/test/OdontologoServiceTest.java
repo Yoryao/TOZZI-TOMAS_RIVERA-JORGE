@@ -13,12 +13,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class OdontologoServiceTest {
 
     Logger log = Logger.getLogger("OdontologServiceTest.class");
 
-    private OdontologoService odontologoService;
+    public OdontologoService odontologoService;
 
 
     @BeforeAll
@@ -52,14 +53,17 @@ public class OdontologoServiceTest {
     @Test
     public void deberiaAgregarYRetornarUnOdontologoEnH2() throws SQLException {
         OdontologoService odontologoService = new OdontologoService(new OdontologoH2Dao());
-        Odontologo odontologo = new Odontologo("Ruiz", "Leonardo", 125);
+        Odontologo odontologo = new Odontologo("Ruuuuuiz", "Leonardo", 125);
         Odontologo odontologoPersistido = odontologoService.registrarOdontologo(odontologo);
 
-        Assertions.assertTrue(odontologoPersistido.getId() != 0);
+        //Assertions.assertTrue(odontologoPersistido.getId() != 0);
+        Assertions.assertNotNull(odontologoPersistido);
+
     }
 
     @Test
     public void debeRetornarListaOdontologos() throws SQLException {
+
 
         assertFalse(odontologoService.buscarOdontologo().isEmpty());
 

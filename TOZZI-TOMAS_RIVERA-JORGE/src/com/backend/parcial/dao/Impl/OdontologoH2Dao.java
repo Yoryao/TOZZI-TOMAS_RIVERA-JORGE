@@ -36,12 +36,13 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
             odontologoRegistrado = new Odontologo(odontologo.getApellido(), odontologo.getNombre(), odontologo.getMatricula());
 
             while (resultSet.next()) {
-                odontologoRegistrado.setId(resultSet.getInt("id"));
+                odontologoRegistrado.setId(resultSet.getInt("ID"));
             }
             connection.commit();
             log.info("Se registro un Odontologo: " + odontologoRegistrado);
         } catch (Exception e) {
             log.info("Error durante la conexion.");
+            log.info(e.getMessage());
             if (connection != null) {
                 try {
                     connection.rollback();
@@ -62,17 +63,22 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
     }
 
     @Override
-    public List<Odontologo> listar() throws SQLException {
+    public List<Odontologo> listar() {
         Connection connection = null;
         List<Odontologo> odontologos = new ArrayList<>();
+        log.info("Voy a consultar..");
 
         try {
+            log.info("entro al try");
+
             connection = ConnectionH2.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ODONTOLOGOS");
+            log.info("no pudo consultar.");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Odontologo odontologo = crearObjetoOdontologo(resultSet);
+                log.info("OD: " + odontologo.getApellido());
                 odontologos.add(odontologo);
             }
 
@@ -91,7 +97,7 @@ public class OdontologoH2Dao implements IDao<Odontologo> {
     }
 
     private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException {
-        return new Odontologo(resultSet.getString("apellido"), resultSet.getNString("nombres"), resultSet.getInt("matricula"), resultSet.getInt("id"));
+        return new Odontologo(resultSet.getString("APELLIDO"), resultSet.getString("NOMBRE"), resultSet.getInt("MATRICULA"), resultSet.getInt("ID"));
     }
 
 }
