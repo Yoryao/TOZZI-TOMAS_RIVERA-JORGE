@@ -1,0 +1,50 @@
+test
+model
+    Odontologo
+dao
+    Idao
+    Impl
+        OdontologoH2Dao
+        OdontologoMemoriaDao
+
+Service
+    OdontologoService.
+
+script.sql
+
+
+
+
+
+
+
+1) Clase Odontologo
+
+Odontologo:
+Numero de matrícula
+Nombre
+Apellido
+
+Patron Idao
+        listarOdontologo();
+        guardarOdontologo();
+
+OdontologoH2Dao
+        listarOdontologo();
+        guardarOdontologo();
+OdontologoMemoriaDao
+        listarOdontologo();
+        guardarOdontologo();
+
+
+
+
+
+Crear un script SQL para la creación de las tablas con sus respectivos atributos.
+
+Tests: Con JUnit testear el listado de todos los odontólogos (previamente guardar algunos odontólogos).
+
+
+
+
+
